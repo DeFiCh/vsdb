@@ -269,7 +269,7 @@ where
     V: ValueEnDe,
 {
     fn drop(&mut self) {
-        *self.inner = self.value.encode();
+        // *self.inner = self.value.encode();
     }
 }
 
