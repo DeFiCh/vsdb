@@ -405,10 +405,7 @@ fn rocksdb_open() -> Result<(DB, Vec<String>)> {
     } else {
         G / DATA_SET_NUM
     };
-    println!(
-        "[vsdb]: The `write_buffer_size` of rocksdb is {}MB, per column family",
-        wr_buffer_size / M
-    );
+    log::info!("rocksdb write_buffer_size per column family = {}MB", wr_buffer_size / M);
     cfg.set_write_buffer_size(wr_buffer_size);
 
     cfg.set_enable_blob_files(true);

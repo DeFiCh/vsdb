@@ -261,7 +261,7 @@ where
     V: ValueEnDe,
 {
     value: V,
-    inner: mapx_raw::ValueMut<'a>,
+    #[allow(unused)] inner: mapx_raw::ValueMut<'a>,
 }
 
 impl<'a, V> Drop for ValueMut<'a, V>
