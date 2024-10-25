@@ -378,7 +378,7 @@ fn rocksdb_open() -> Result<(DB, Vec<String>)> {
 
     let mut cfg = Options::default();
 
-    cfg.set_max_open_files(128);
+    cfg.set_max_open_files(256);
 
     cfg.create_if_missing(true);
     cfg.create_missing_column_families(true);
