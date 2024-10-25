@@ -124,9 +124,11 @@ impl Engine for RocksEngine {
         let x = LK.lock();
 
         // step 1
-        let ret = crate::parse_prefix!(
-            self.meta.get(self.prefix_allocator.key).unwrap().unwrap()
-        );
+        let ret = crate::parse_prefix!(self
+            .meta
+            .get(self.prefix_allocator.key)
+            .unwrap()
+            .unwrap());
 
         // step 2
         self.meta
@@ -376,6 +378,8 @@ fn rocksdb_open() -> Result<(DB, Vec<String>)> {
 
     let mut cfg = Options::default();
 
+    cfg.set_max_open_files(128);
+
     cfg.create_if_missing(true);
     cfg.create_missing_column_families(true);
 
@@ -405,7 +409,10 @@ fn rocksdb_open() -> Result<(DB, Vec<String>)> {
     } else {
         G / DATA_SET_NUM
     };
-    log::info!("rocksdb write_buffer_size per column family = {}MB", wr_buffer_size / M);
+    log::info!(
+        "rocksdb write_buffer_size per column family = {}MB",
+        wr_buffer_size / M
+    );
     cfg.set_write_buffer_size(wr_buffer_size);
 
     cfg.set_enable_blob_files(true);
